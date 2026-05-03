@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZaamKomik — Digital Comic Library</title>
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="ZaamKomik — Perpustakaan komik digital terlengkap. Baca manga, manhwa, manhua favoritmu secara gratis.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="particleCanvas"></canvas>
+
+    <nav id="navbar">
+        <div class="nav-inner">
+            <div class="logo" onclick="showView('home')">
+                <div class="logo-icon"><i data-lucide="zap"></i></div>
+                <div class="logo-text">
+                    <span class="logo-main">ZAAM</span><span class="logo-accent">KOMIK</span>
+                </div>
+            </div>
+            <div class="search-wrap">
+                <i data-lucide="search" class="search-icon-svg"></i>
+                <input type="text" id="searchInput" placeholder="Cari judul komik..." autocomplete="off">
+                <kbd>↵</kbd>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-dashboard" onclick="showView('dashboard')">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div id="tabBar" class="tab-bar">
+            <button onclick="showView('home')" class="tab-btn active" data-view="home">
+                <i data-lucide="home"></i><span>Home</span>
+            </button>
+            <button onclick="showView('recommendations')" class="tab-btn" data-view="recommendations">
+                <i data-lucide="star"></i><span>Rekomendasi</span>
+            </button>
+            <button onclick="showView('trending')" class="tab-btn" data-view="trending">
+                <i data-lucide="flame"></i><span>Trending</span>
+            </button>
+            <button onclick="showView('latest')" class="tab-btn" data-view="latest">
+                <i data-lucide="clock"></i><span>Terbaru</span>
+            </button>
+            <button onclick="showView('genres')" class="tab-btn" data-view="genres">
+                <i data-lucide="layers"></i><span>Genre</span>
+            </button>
+            <button onclick="showView('bookmarks')" class="tab-btn" data-view="bookmarks">
+                <i data-lucide="bookmark"></i><span>Tandain</span>
+            </button>
+        </div>
+
+        <div id="heroBanner" class="hero-banner">
+            <div class="hero-content">
+                <div class="hero-badge">✦ Platform Komik #1</div>
+                <h1 class="hero-title">Baca Komik<br><span class="gradient-text">Tanpa Batas</span></h1>
+                <p class="hero-desc">Ribuan judul manga, manhwa & manhua tersedia gratis. Nikmati pengalaman membaca terbaik.</p>
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-num">10K+</span><span class="stat-label">Judul</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">Chapter</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat"><span class="stat-num">Free</span><span class="stat-label">Selamanya</span></div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="float-card fc1"><i data-lucide="book-open"></i><span>Baca Sekarang</span></div>
+                <div class="float-card fc2"><i data-lucide="trending-up"></i><span>Trending</span></div>
+                <div class="hero-orb"></div>
+            </div>
+        </div>
+
+        <div id="mainContent">
+            <div class="section-header">
+                <h2 id="sectionTitle" class="section-title"></h2>
+                <div class="title-line"></div>
+            </div>
+            <div id="contentGrid" class="comic-grid"></div>
+        </div>
+
+        <div id="detailView" class="hidden"></div>
+        <div id="readerView" class="hidden"></div>
+
+        <div id="dashboardView" class="hidden">
+            <div class="dashboard-wrap">
+                <button class="back-btn" onclick="showView('home')">
+                    <i data-lucide="arrow-left"></i> Kembali ke Home
+                </button>
+
+                <section class="dash-section site-info">
+                    <div class="dash-badge">PLATFORM</div>
+                    <h2 class="dash-title">Tentang <span class="gradient-text">ZaamKomik</span></h2>
+                    <p class="dash-desc">ZaamKomik adalah platform perpustakaan digital komik gratis yang menyediakan akses ribuan judul manga, manhwa, dan manhua dalam satu tempat. Dibangun dengan teknologi modern untuk pengalaman membaca yang mulus dan menyenangkan.</p>
+
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <div class="info-icon"><i data-lucide="globe"></i></div>
+                            <div class="info-body">
+                                <div class="info-label">Tipe Platform</div>
+                                <div class="info-val">Perpustakaan Digital Komik</div>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i data-lucide="shield-check"></i></div>
+                            <div class="info-body">
+                                <div class="info-label">Akses</div>
+                                <div class="info-val">100% Gratis · No Login</div>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i data-lucide="smartphone"></i></div>
+                            <div class="info-body">
+                                <div class="info-label">Responsif</div>
+                                <div class="info-val">Mobile · Tablet · Desktop</div>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon"><i data-lucide="zap"></i></div>
+                            <div class="info-body">
+                                <div class="info-label">Performa</div>
+                                <div class="info-val">Lazy Load · Fast Render</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dash-section creator-section">
+                    <div class="dash-badge">KREATOR</div>
+                    <h2 class="dash-title">Dibuat oleh <span class="gradient-text">ZAAM</span></h2>
+                    <div class="creator-card">
+                        <div class="creator-avatar">
+                            <div class="avatar-ring"></div>
+                            <div class="avatar-inner">Z</div>
+                            <div class="avatar-badge"><i data-lucide="code-2"></i></div>
+                        </div>
+                        <div class="creator-info">
+                            <h3 class="creator-name">ZAAM</h3>
+                            <p class="creator-role">Full-Stack Developer & Web Designer</p>
+                            <p class="creator-bio">Seorang developer independen yang passionate dalam membangun platform digital berkualitas tinggi. ZaamKomik diciptakan dari nol dengan dedikasi penuh untuk memberikan pengalaman membaca komik terbaik bagi komunitas.</p>
+                            <div class="creator-tags">
+                                <span class="tag">Web Developer</span>
+                                <span class="tag">UI/UX Designer</span>
+                                <span class="tag">API Builder</span>
+                                <span class="tag">Comic Enthusiast</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-wrap">
+                        <h3 class="sub-title"><i data-lucide="cpu"></i> Tech Stack</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item"><span class="skill-dot"></span>HTML5 / CSS3</div>
+                            <div class="skill-item"><span class="skill-dot"></span>Vanilla JavaScript</div>
+                            <div class="skill-item"><span class="skill-dot"></span>REST API Integration</div>
+                            <div class="skill-item"><span class="skill-dot"></span>Responsive Design</div>
+                            <div class="skill-item"><span class="skill-dot"></span>UI/UX Engineering</div>
+                            <div class="skill-item"><span class="skill-dot"></span>Backend Development</div>
+                        </div>
+                    </div>
+                    <div class="contact-wrap">
+                        <h3 class="sub-title"><i data-lucide="send"></i> Hubungi ZAAM</h3>
+                        <p class="contact-desc">Ada pertanyaan, kolaborasi, atau bug report? Jangan ragu untuk menghubungi langsung.</p>
+                        <div class="contact-btns">
+                            <a href="https://wa.me/6282374325993" target="_blank" class="contact-btn wa-btn">
+                                <div class="contact-btn-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                </div>
+                                <div class="contact-btn-text">
+                                    <span class="contact-label">WhatsApp</span>
+                                    <span class="contact-val">+62 823-7432-5993</span>
+                                </div>
+                                <i data-lucide="external-link" class="contact-ext"></i>
+                            </a>
+                            <a href="mailto:azzamamri2011@gmail.com" class="contact-btn email-btn">
+                                <div class="contact-btn-icon"><i data-lucide="mail"></i></div>
+                                <div class="contact-btn-text">
+                                    <span class="contact-label">Email</span>
+                                    <span class="contact-val">azzamamri2011@gmail.com</span>
+                                </div>
+                                <i data-lucide="external-link" class="contact-ext"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="dash-footer">
+                    <p>© 2024 ZaamKomik — Dibuat dengan <span class="heart">♥</span> oleh <strong>ZAAM</strong></p>
+                    <p class="footer-sub">Platform gratis untuk semua pecinta komik Indonesia</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOOKMARKS VIEW -->
+        <div id="bookmarksView" class="hidden">
+            <div class="bookmarks-wrap">
+                <button class="back-btn" onclick="showView('home')">
+                    <i data-lucide="arrow-left"></i> Kembali ke Home
+                </button>
+                <div class="bookmarks-header">
+                    <div class="bookmarks-title-row">
+                        <div>
+                            <div class="dash-badge">KOLEKSI</div>
+                            <h2 class="dash-title">Komik <span class="gradient-text">Ditandai</span></h2>
+                        </div>
+                        <button class="btn-clear-bm" id="btnClearBookmarks" onclick="clearAllBookmarks()">
+                            <i data-lucide="trash-2"></i> Hapus Semua
+                        </button>
+                    </div>
+                    <p class="dash-desc">Komik yang kamu tandai akan tersimpan otomatis di sini.</p>
+                </div>
+                <div id="bookmarksGrid" class="comic-grid"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="floating-contact" id="floatingContact">
+        <button class="fab-main" onclick="toggleFab()" title="Hubungi Kami">
+            <i data-lucide="message-circle" class="fab-icon-open"></i>
+            <i data-lucide="x" class="fab-icon-close hidden"></i>
+        </button>
+        <div class="fab-options" id="fabOptions">
+            <a href="https://wa.me/6282374325993" target="_blank" class="fab-opt wa" title="WhatsApp">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span>WhatsApp</span>
+            </a>
+            <a href="mailto:azzamamri2011@gmail.com" class="fab-opt email" title="Email">
+                <i data-lucide="mail"></i>
+                <span>Email</span>
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
