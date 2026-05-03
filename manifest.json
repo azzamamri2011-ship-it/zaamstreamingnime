@@ -1,0 +1,91 @@
+{
+  "name": "ZaamPort – Komiku & ZaamNime",
+  "short_name": "ZaamPort",
+  "description": "Satu pintu menuju dunia manga, manhwa, dan anime favoritmu — tanpa batas.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07070f",
+  "theme_color": "#07070f",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["entertainment", "books", "lifestyle"],
+  "icons": [
+    {
+      "src": "image.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "image.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "image.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "image.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "image.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "image.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "image.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "image.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "image.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Halaman utama ZuPortal"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Baca Komiku",
+      "short_name": "Komiku",
+      "description": "Langsung ke halaman Komiku",
+      "url": "Komiku/komiku.html",
+      "icons": [{ "src": "image.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Tonton ZaamNime",
+      "short_name": "ZaamNime",
+      "description": "Langsung ke halaman ZaamNime",
+      "url": "Anime/zaamnime.html",
+      "icons": [{ "src": "image.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
