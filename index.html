@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ZaamStream V2 — NexRay Style</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ff3e3e">
+    <meta name="description" content="ZaamStream — Platform streaming anime subtitle Indonesia gratis.">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ZaamStream">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -14,6 +30,10 @@
     <header class="top-bar">
         <div class="brand">ZAAM<span>STREAM</span></div>
         <div class="header-actions">
+            <!-- PWA Install Button (hidden by default, shown by JS) -->
+            <div class="user-action" id="pwa-install-btn" style="display:none" title="Install App">
+                <i class="fa-solid fa-download"></i>
+            </div>
             <div class="user-action" onclick="switchPage('info')">
                 <i class="fa-solid fa-circle-info"></i>
             </div>
@@ -233,6 +253,38 @@
                     </div>
                 </a>
 
+                <!-- ===== DOWNLOAD APK BUTTON (di bawah kontak Dev 2) ===== -->
+                <div class="download-section-title">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    Download Aplikasi
+                </div>
+
+                <a href="#" class="apk-download-btn" id="apk-download-btn" onclick="handleApkDownload(event)">
+                    <div class="apk-btn-icon-wrap">
+                        <i class="fa-brands fa-android"></i>
+                    </div>
+                    <div class="apk-btn-text">
+                        <span class="apk-btn-title">Download APK Android</span>
+                        <span class="apk-btn-sub">ZaamStream v2.0.1 · ~8 MB</span>
+                    </div>
+                    <div class="apk-btn-right">
+                        <div class="apk-badge">APK</div>
+                        <i class="fa-solid fa-cloud-arrow-down apk-arrow"></i>
+                    </div>
+                </a>
+
+                <!-- PWA Install Card -->
+                <div class="pwa-install-card" id="pwa-install-card" style="display:none">
+                    <div class="pwa-card-icon">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                    </div>
+                    <div class="pwa-card-text">
+                        <span class="pwa-card-title">Install ke Homescreen</span>
+                        <span class="pwa-card-sub">Akses ZaamStream seperti aplikasi native</span>
+                    </div>
+                    <button class="pwa-card-btn" onclick="triggerPwaInstall()">Install</button>
+                </div>
+
                 <!-- Footer note -->
                 <div class="footer-note">
                     <i class="fa-solid fa-heart" style="color:var(--primary)"></i>
@@ -251,6 +303,17 @@
     <!-- ===== PLAYER OVERLAY ===== -->
     <div id="player-page" class="full-page" style="display:none">
         <div id="player-content"></div>
+    </div>
+
+    <!-- ===== QUALITY / SERVER MODAL ===== -->
+    <div id="quality-modal" class="quality-modal-backdrop" style="display:none" onclick="closeQualityModal(event)">
+        <div class="quality-modal">
+            <div class="quality-modal-header">
+                <span class="quality-modal-title"><i class="fa-solid fa-sliders"></i> Pilih Kualitas & Server</span>
+                <button class="quality-modal-close" onclick="closeQualityModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="quality-modal-body"></div>
+        </div>
     </div>
 
     <!-- ===== BOTTOM NAV ===== -->

@@ -797,6 +797,151 @@ body {
 .wa-btn-arrow { font-size: 0.75rem; opacity: 0.65; }
 
 /* ===========================
+   DOWNLOAD APK BUTTON
+   =========================== */
+.download-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 0 2px;
+    margin-top: 4px;
+}
+
+.download-section-title i { color: #a855f7; }
+
+.apk-download-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: white;
+    padding: 16px 18px;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    box-shadow: 0 6px 24px rgba(168, 85, 247, 0.3);
+    transition: transform 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+}
+
+.apk-download-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 10px rgba(168, 85, 247, 0.15);
+}
+
+.apk-btn-icon-wrap {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.apk-btn-text { flex: 1; min-width: 0; }
+
+.apk-btn-title {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.apk-btn-sub {
+    display: block;
+    font-size: 0.72rem;
+    opacity: 0.78;
+    margin-top: 2px;
+}
+
+.apk-btn-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.apk-badge {
+    padding: 3px 8px;
+    background: rgba(255,255,255,0.22);
+    border-radius: 20px;
+    font-size: 0.63rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.apk-arrow { font-size: 1.1rem; opacity: 0.85; }
+
+/* ===========================
+   PWA INSTALL CARD
+   =========================== */
+.pwa-install-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, rgba(255,62,62,0.1), rgba(255,62,62,0.05));
+    border: 1.5px solid rgba(255,62,62,0.25);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    animation: pageIn 0.3s ease;
+}
+
+.pwa-card-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--primary-dim);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.pwa-card-text { flex: 1; min-width: 0; }
+
+.pwa-card-title {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 800;
+}
+
+.pwa-card-sub {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+}
+
+.pwa-card-btn {
+    padding: 9px 18px;
+    background: var(--primary);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px var(--primary-glow);
+    transition: transform 0.18s;
+}
+
+.pwa-card-btn:active { transform: scale(0.95); }
+
+/* ===========================
    FOOTER NOTE
    =========================== */
 .footer-note {
@@ -825,7 +970,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-top: 1px solid var(--border);
+    border-top: 1px  solid var(--border);
     z-index: 1000;
 }
 
@@ -1058,7 +1203,7 @@ body {
     font-size: 0.8rem;
     flex-shrink: 0;
     box-shadow: 0 3px 14px var(--primary-glow);
-    padding-left: 2px; /* optical centering for play icon */
+    padding-left: 2px;
 }
 
 /* ===========================
@@ -1115,7 +1260,7 @@ body {
 }
 
 .player-info-box {
-    padding: 18px 16px 24px;
+    padding: 18px 16px 10px;
 }
 
 .player-title {
@@ -1156,6 +1301,142 @@ body {
 }
 
 /* ===========================
+   QUALITY / SERVER SELECTOR
+   =========================== */
+.quality-section {
+    padding: 14px 16px 24px;
+    border-top: 1px solid var(--border2);
+    margin-top: 4px;
+}
+
+.quality-section-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.quality-section-label i { color: var(--primary); }
+
+/* Quality pill tabs */
+.quality-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.quality-tab {
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: inherit;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.18s;
+    outline: none;
+    position: relative;
+}
+
+.quality-tab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 3px 14px var(--primary-glow);
+}
+
+.quality-tab.empty-q {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.quality-tab:not(.empty-q):active { transform: scale(0.95); }
+
+/* Server list */
+.server-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.server-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    cursor: pointer;
+    border: 1.5px solid var(--border2);
+    transition: all 0.18s;
+}
+
+.server-item.active-server {
+    border-color: rgba(255,62,62,0.45);
+    background: var(--surface2);
+}
+
+.server-item:active {
+    transform: scale(0.98);
+    background: var(--surface2);
+}
+
+.server-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--primary-dim);
+    border: 1px solid rgba(255,62,62,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 0.82rem;
+    flex-shrink: 0;
+}
+
+.server-icon-playing {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+.server-name {
+    flex: 1;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.server-quality-badge {
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 0.64rem;
+    font-weight: 800;
+    background: var(--surface3);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+}
+
+.server-playing-badge {
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 0.64rem;
+    font-weight: 800;
+    background: var(--primary-dim);
+    color: var(--primary);
+    border: 1px solid rgba(255,62,62,0.25);
+}
+
+/* ===========================
    LOADER
    =========================== */
 .loader {
@@ -1193,3 +1474,77 @@ body {
 }
 
 .error-state p { font-size: 0.85rem; }
+
+/* ===========================
+   QUALITY MODAL (backdrop sheet)
+   =========================== */
+.quality-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.quality-modal {
+    width: 100%;
+    background: var(--surface);
+    border-radius: 24px 24px 0 0;
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: slideUp 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+}
+
+.quality-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border2);
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+}
+
+.quality-modal-title {
+    font-size: 0.92rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quality-modal-title i { color: var(--primary); }
+
+.quality-modal-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface3);
+    border: none;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+}
+
+.quality-modal-close:active { transform: scale(0.92); }
