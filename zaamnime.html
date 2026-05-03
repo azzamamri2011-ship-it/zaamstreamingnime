@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZaamStream V2 — Zaam Style</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ff3e3e">
+    <meta name="description" content="ZaamStream — Platform streaming anime subtitle Indonesia gratis.">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ZaamStream">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <header class="top-bar">
+        <div class="brand">ZAAM<span>STREAM</span></div>
+        <div class="header-actions">
+            <!-- PWA Install Button (hidden by default, shown by JS) -->
+            <div class="user-action" id="pwa-install-btn" style="display:none" title="Install App">
+                <i class="fa-solid fa-download"></i>
+            </div>
+            <div class="user-action" onclick="switchPage('info')">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN PAGES ===== -->
+    <main id="app">
+
+        <!-- HOME PAGE -->
+        <section id="page-home" class="page active">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Sedang Tayang</h2>
+                    <span class="see-all-btn" onclick="switchPage('search')">
+                        Lihat Semua <i class="fa-solid fa-chevron-right"></i>
+                    </span>
+                </div>
+                <div class="horizontal-list" id="ongoing-list"></div>
+
+                <div class="section-header" style="margin-top: 28px;">
+                    <h2>Baru Tamat</h2>
+                </div>
+                <div class="anime-grid" id="completed-grid"></div>
+            </div>
+        </section>
+
+        <!-- SEARCH PAGE -->
+        <section id="page-search" class="page">
+            <div class="container">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Cari judul anime..." onkeyup="handleSearch(event)">
+                    <div class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+                <div id="search-empty" class="empty-state">
+                    <i class="fa-solid fa-film"></i>
+                    <p>Ketik minimal 3 huruf untuk mencari</p>
+                </div>
+                <div id="search-result-info" class="section-header" style="display:none">
+                    <h2 id="search-query-text">Hasil Pencarian</h2>
+                    <span id="search-count" style="color:var(--text-dim);font-size:0.75rem"></span>
+                </div>
+                <div class="anime-grid" id="search-grid"></div>
+            </div>
+        </section>
+
+        <!-- SCHEDULE PAGE -->
+        <section id="page-schedule" class="page">
+            <div class="container">
+                <div class="section-header" style="margin-top:16px">
+                    <h2>Jadwal Rilis</h2>
+                </div>
+                <div class="day-selector" id="day-selector"></div>
+                <div class="anime-grid" id="schedule-grid" style="margin-top: 20px;"></div>
+            </div>
+        </section>
+
+        <!-- INFO PAGE -->
+        <section id="page-info" class="page">
+            <div class="info-wrapper">
+
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-banner">
+                        <div class="banner-pattern"></div>
+                        <div class="banner-text">ZAAMSTREAM V2</div>
+                    </div>
+                    <div class="profile-body">
+                        <!-- Dual Avatar -->
+                        <div class="dual-avatar-row">
+                            <div class="creator-avatar-wrap">
+                                <div class="creator-avatar ca-red">Z</div>
+                                <div class="creator-badge"><i class="fa-solid fa-check"></i></div>
+                            </div>
+                            <div class="creator-avatar-wrap" style="margin-left:-14px">
+                                <div class="creator-avatar ca-blue">M</div>
+                                <div class="creator-badge cb-blue"><i class="fa-solid fa-check"></i></div>
+                            </div>
+                        </div>
+                        <h2 class="profile-name">Zaam Stream</h2>
+                        <div class="profile-version">
+                            <span class="version-dot"></span>
+                            Version 2.0.1 Stable
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-number">1K+</div>
+                        <div class="stat-label">Anime</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">Sub ID</div>
+                        <div class="stat-label">Bahasa</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">Free</div>
+                        <div class="stat-label">Gratis</div>
+                    </div>
+                </div>
+
+                <!-- Info Details -->
+                <div class="info-card">
+                    <div class="info-card-title">Informasi Aplikasi</div>
+
+                    <!-- Creator 1: Zaam -->
+                    <div class="info-row">
+                        <div class="info-icon-wrap">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="info-row-content">
+                            <div class="info-row-label">Pencipta</div>
+                            <div class="info-row-value">Zaam</div>
+                        </div>
+                        <div class="creator-tag tag-red">Dev 1</div>
+                    </div>
+
+                    <!-- Creator 2: Morgan -->
+                    <div class="info-row">
+                        <div class="info-icon-wrap info-icon-blue">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="info-row-content">
+                            <div class="info-row-label">Pencipta</div>
+                            <div class="info-row-value">Morgan</div>
+                        </div>
+                        <div class="creator-tag tag-blue">Dev 2</div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon-wrap">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <div class="info-row-content">
+                            <div class="info-row-label">Engine / API</div>
+                            <div class="info-row-value">Sankavollerei API</div>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon-wrap">
+                            <i class="fa-solid fa-code-branch"></i>
+                        </div>
+                        <div class="info-row-content">
+                            <div class="info-row-label">Versi Build</div>
+                            <div class="info-row-value">NexRay Style V2</div>
+                        </div>
+                    </div>
+
+                    <div class="info-row" style="border:none">
+                        <div class="info-icon-wrap">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div class="info-row-content">
+                            <div class="info-row-label">Status</div>
+                            <div class="info-row-value status-active">
+                                <span class="pulse-dot"></span> Online & Aktif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Section -->
+                <div class="about-card">
+                    <div class="about-card-title">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Tentang Website
+                    </div>
+                    <p class="about-text">
+                        ZaamStream adalah platform streaming anime subtitle Indonesia yang dirancang untuk memberikan pengalaman menonton yang cepat, nyaman, dan bebas gangguan. Dibangun dengan teknologi web modern dan antarmuka yang intuitif, platform ini hadir untuk para pecinta anime Tanah Air yang ingin menikmati konten favorit mereka kapan saja dan di mana saja — tanpa perlu mendaftar akun atau membayar biaya berlangganan apapun.
+                    </p>
+                    <p class="about-text" style="margin-bottom:0">
+                        Didukung oleh Sankavollerei API sebagai mesin penggerak utama, ZaamStream menyajikan ribuan judul anime dari berbagai genre — mulai dari action, romance, isekai, hingga slice of life — lengkap dengan pembaruan jadwal rilis secara real-time. Proyek ini dibuat dengan penuh dedikasi oleh Zaam & Morgan sebagai wujud cinta terhadap dunia animasi Jepang dan komunitas anime Indonesia yang terus berkembang.
+                    </p>
+                </div>
+
+                <!-- WhatsApp Buttons Section -->
+                <div class="wa-section-title">
+                    <i class="fa-solid fa-address-book"></i>
+                    Hubungi Pencipta
+                </div>
+
+                <!-- WA Button 1 - Zaam -->
+                <a href="https://wa.me/6282374325993" class="wa-btn wa-btn-zaam" target="_blank">
+                    <div class="wa-btn-icon">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div class="wa-btn-text">
+                        <span class="wa-btn-title">Zaam — Developer 1</span>
+                        <span class="wa-btn-sub">+62 823-7432-5993</span>
+                    </div>
+                    <div class="wa-btn-right">
+                        <div class="wa-dev-badge">Dev 1</div>
+                        <i class="fa-solid fa-chevron-right wa-btn-arrow"></i>
+                    </div>
+                </a>
+
+                <!-- WA Button 2 - Morgan -->
+                <a href="https://wa.me/6285129882845" class="wa-btn wa-btn-morgan" target="_blank">
+                    <div class="wa-btn-icon wa-icon-blue">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div class="wa-btn-text">
+                        <span class="wa-btn-title">Morgan — Developer 2</span>
+                        <span class="wa-btn-sub">+62 851-2988-2845</span>
+                    </div>
+                    <div class="wa-btn-right">
+                        <div class="wa-dev-badge wb-badge-blue">Dev 2</div>
+                        <i class="fa-solid fa-chevron-right wa-btn-arrow"></i>
+                    </div>
+                </a>
+
+
+
+
+                <!-- Footer note -->
+                <div class="footer-note">
+                    <i class="fa-solid fa-heart" style="color:var(--primary)"></i>
+                    Made with love for anime community Indonesia
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== DETAIL OVERLAY ===== -->
+    <div id="detail-page" class="full-page" style="display:none">
+        <div id="detail-content"></div>
+    </div>
+
+    <!-- ===== PLAYER OVERLAY ===== -->
+    <div id="player-page" class="full-page" style="display:none">
+        <div id="player-content"></div>
+    </div>
+
+    <!-- ===== QUALITY / SERVER MODAL ===== -->
+    <div id="quality-modal" class="quality-modal-backdrop" style="display:none" onclick="closeQualityModal(event)">
+        <div class="quality-modal">
+            <div class="quality-modal-header">
+                <span class="quality-modal-title"><i class="fa-solid fa-sliders"></i> Pilih Kualitas & Server</span>
+                <button class="quality-modal-close" onclick="closeQualityModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="quality-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- ===== BOTTOM NAV ===== -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchPage('home', this)">
+            <div class="nav-icon-wrap">
+                <i class="fa-solid fa-house"></i>
+            </div>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('search', this)">
+            <div class="nav-icon-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <span>Search</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('schedule', this)">
+            <div class="nav-icon-wrap">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <span>Jadwal</span>
+        </div>
+        <div class="nav-item" onclick="switchPage('info', this)">
+            <div class="nav-icon-wrap">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <span>Info</span>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
