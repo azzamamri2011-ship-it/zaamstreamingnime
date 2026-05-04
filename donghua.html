@@ -1,0 +1,175 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZaaMorganz — Donghua Stream</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header>
+    <div class="logo" onclick="switchTab('sec-home')">
+        <div class="logo-icon"><i class="fa-solid fa-bolt fa-xs"></i></div>
+        <div class="logo-text">Zaa<span>MORGANZ</span></div>
+    </div>
+    <div class="header-right">
+        <div class="header-badge"><i class="fa-solid fa-circle" style="font-size:.45rem; margin-right:4px; color:#ff4444; animation: pulse 1.5s infinite;"></i>LIVE</div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- ─── HOME ─── -->
+    <div id="sec-home" class="tab-content">
+        <div class="section-title">
+            <span><i class="fa-solid fa-fire" style="color:var(--red); margin-right:6px; font-size:.85rem;"></i>Update Terbaru</span>
+        </div>
+        <div class="grid" id="res-latest"></div>
+
+        <div class="divider"></div>
+
+        <div class="section-title">
+            <span><i class="fa-solid fa-spinner fa-spin" style="color:var(--gold); margin-right:6px; font-size:.85rem; animation-duration:3s;"></i>Ongoing</span>
+        </div>
+        <div class="grid" id="res-ongoing"></div>
+    </div>
+
+    <!-- ─── SEARCH ─── -->
+    <div id="sec-search" class="tab-content hidden">
+        <div class="search-wrap">
+            <div class="search-bar">
+                <span class="s-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" id="query" placeholder="Cari judul atau ketik huruf A–Z…"
+                    onkeyup="if(event.key==='Enter') handleSearch()">
+                <button class="search-btn" onclick="handleSearch()">CARI</button>
+            </div>
+        </div>
+        <div class="alphabet-chips" id="alpha-chips"></div>
+        <div class="grid" id="res-search">
+            <div class="empty-state">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>Masukkan kata kunci atau pilih huruf di atas</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── INFO ─── -->
+    <div id="sec-info" class="tab-content hidden">
+        <div class="info-hero">
+            <h2><span>ZaaMorganz</span> STREAM</h2>
+            <p>Platform streaming Donghua yang didesain khusus untuk memberikan pengalaman menonton yang cepat, ringan, dan update setiap harinya. Kami menyajikan konten berkualitas tinggi bagi para penggemar animasi China.</p>
+        </div>
+
+        <div class="info-stats">
+            <div class="stat-box">
+                <div class="stat-num">500+</div>
+                <div class="stat-label">Judul</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">Daily</div>
+                <div class="stat-label">Update</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">Free</div>
+                <div class="stat-label">Gratis</div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span><i class="fa-solid fa-users" style="color:var(--gold); margin-right:6px; font-size:.85rem;"></i>Tim Kreator</span>
+        </div>
+        <div class="info-card">
+            <p>Website ini dikembangkan dan dikelola secara profesional oleh duet tim kreatif, <strong style="color:var(--text)">Zaam dan Morgan</strong>. Kami percaya bahwa akses hiburan haruslah tanpa batas — kami terus memperbarui sistem API dan server agar pengalaman menonton Anda tetap lancar.</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">Z</div>
+                <div>
+                    <div class="team-name">Zaam</div>
+                    <div class="team-role">Lead Developer</div>
+                </div>
+                <a href="https://wa.me/6282374325993" target="_blank" class="btn-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar" style="background: linear-gradient(135deg, #1a3a8b, #0d2359);">M</div>
+                <div>
+                    <div class="team-name">Morgan</div>
+                    <div class="team-role">Content Manager</div>
+                </div>
+                <a href="https://wa.me/6285129882845" target="_blank" class="btn-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── SCHEDULE ─── -->
+    <div id="sec-schedule" class="tab-content hidden">
+        <div class="section-title">
+            <span><i class="fa-solid fa-calendar-days" style="color:var(--gold); margin-right:6px; font-size:.85rem;"></i>Jadwal Rilis</span>
+        </div>
+        <div id="res-schedule"></div>
+    </div>
+
+    <!-- ─── DETAIL ─── -->
+    <div id="sec-detail" class="hidden">
+        <button class="btn-back" onclick="backToPrev()">
+            <i class="fa-solid fa-arrow-left"></i> Kembali
+        </button>
+        <div id="detail-content"></div>
+        <div class="section-title" style="margin-top:24px;">
+            <span><i class="fa-solid fa-list" style="color:var(--gold); margin-right:6px; font-size:.85rem;"></i>Daftar Episode</span>
+        </div>
+        <div class="ep-grid" id="res-episodes"></div>
+        <div style="height:16px"></div>
+    </div>
+
+    <!-- ─── PLAYER ─── -->
+    <div id="sec-player" class="hidden">
+        <button class="btn-back" onclick="showSec('sec-detail')">
+            <i class="fa-solid fa-arrow-left"></i> Kembali
+        </button>
+        <div class="player-title">
+            <i class="fa-solid fa-play"></i>
+            <span id="play-title"></span>
+        </div>
+        <div class="video-wrap">
+            <iframe id="iframe-player" src="" allowfullscreen></iframe>
+        </div>
+        <div style="height:16px"></div>
+    </div>
+
+</div>
+
+<!-- ─── BOTTOM NAV ─── -->
+<nav class="bottom-nav">
+    <div class="nav-item active" id="nav-home" onclick="switchTab('sec-home')">
+        <i class="fa-solid fa-house"></i>
+        <span>HOME</span>
+    </div>
+    <div class="nav-item" id="nav-search" onclick="switchTab('sec-search')">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>CARI</span>
+    </div>
+    <div class="nav-item" id="nav-schedule" onclick="switchTab('sec-schedule')">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>JADWAL</span>
+    </div>
+    <div class="nav-item" id="nav-info" onclick="switchTab('sec-info')">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>INFO</span>
+    </div>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
